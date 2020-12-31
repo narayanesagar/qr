@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div id="result"/>
+    
+    <script type="text/javascript" src="easy.qrcode.min.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', () => {			
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const vpa = urlParams.get('vpa');
+			const name = urlParams.get('name');
+			const amount = urlParams.get('amt');
+			const minamt = urlParams.get('minamt');
+			const note = urlParams.get('note');
+			
+			
+			
+			
+			var qrText = "upi://pay?";
+			
+			if(vpa!= null && vpa.trim() != '')
+			{
+				qrText=qrText+"pa="+vpa;
+			}
+			if(name!= null && name.trim() != '')
+			{
+				qrText=qrText+"&pn="+name;
+			}
+			if(amount!= null && amount.trim() != '')
+			{
+				qrText=qrText+"&am="+amount;
+			}
+			if(minamt!= null && minamt.trim() != '')
+			{
+				qrText=qrText+"&mam="+minamt;
+			}
+			if(note!= null && note.trim() != '')
+			{
+				qrText=qrText+"&tn="+note;
+			}
+				console.log(qrText);
+			var options = {
+				text: qrText,
+				quietZone: 10,
+				correctLevel : QRCode.CorrectLevel.H, // L, M, Q, H
+				width: 256,
+				height: 256,
+				colorDark : "#000000",
+				colorLight : "#ffffff",
+				//logo:""
+				PO: '#e1622f', // Global Posotion Outer color. if not set, the defaut is `colorDark`
+				PI: '#aa5b71',
+				drawer :'canvas',
+				onRenderingEnd : abc
+			};
+			var qr = new QRCode(document.getElementById("result"), options);
+				
+		
+				
+			})
+			
+			var abc =function(qrCodeOptions, dataURL)
+			{
+			//var dom= document.getElementById("result");
+				//elem.parentNode.removeChild(dom);
+				//console.log(qrCodeOptions);
+			window.location =dataURL;
+			
+			//document.
+			
+			}
+			
+    </script>
+
+</head>
+</html>
